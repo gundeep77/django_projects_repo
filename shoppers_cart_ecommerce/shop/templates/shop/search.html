@@ -1,0 +1,93 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} Search Results {% endblock %}
+
+{% block css %}
+
+.col-md-4 {
+display: inline-block;
+margin-left: -4px;
+}
+
+.col-md-4 img {
+width: 100%;
+height: 255px;
+}
+
+.carousel-indicators .active {
+background-color: gray;
+}
+
+.carousel-indicators {
+bottom: -50px;
+}
+.carousel-control-next, .carousel-control-prev{
+filter: invert();
+top: auto;
+bottom: auto;
+}
+
+
+body .no-padding {
+padding-left: 0;
+padding-right: 0;
+}
+
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<!--Slideshow starts here -->
+{% for products, range, query in allProds_query %}
+<div class="container">
+    <h2 class="mt-2" style="padding-left: 10px;">Search Results for "{{query}}":</h2>
+</div>
+<div class="container">
+    <h3 class="my-4 container" style="padding-left: 10px;">{{products.0.category}}</h3>
+    <div id="demo{{forloop.counter}}" class="carousel slide my-3">
+        <ul class="carousel-indicators">
+            <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+            {% for i in range %}
+            <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+            {% endfor %}
+        </ul>
+
+        <div class="container carousel-inner no-padding">
+            <div class="carousel-item active">
+
+                {% for prod in products|slice:"0:" %}
+
+                <div class="col-xs-4 col-sm-4 col-md-4">
+                    <div class="card" style="width: 18rem; background-color: rgb(205, 205, 211);">
+                        <img src='/media/{{prod.image}}' class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{prod.product_name}}</h5>
+                            <p class="card-text"></p>
+                            <a href="#" class="btn btn-secondary">Look Inside</a>
+                        </div>
+                    </div>
+                </div>
+
+                {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+            </div>
+            <div class="carousel-item">
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- left and right controls for the slide -->
+<a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+</a>
+
+<a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+</a>
+{% endfor %}
+{% endblock %}

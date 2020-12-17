@@ -1,0 +1,31 @@
+{% extends 'tuapp/basic.html' %}
+
+{% block css %} 
+.my-footer {
+  position: relativ;
+  width: fit-content;
+  margin-top: 500px;
+  margin-left: 510px;
+}
+{% endblock %}
+
+{% block body %}
+
+<div class="alert alert-warning" role="alert">
+    <!--  <h4 class="alert-heading">Warning!</h4>-->
+    <p>Please fill in the required fields!</p>
+</div>
+
+
+<div>
+    <a class="btn btn-dark mx-2" onclick="goBack()" role="button">Go Back</a>
+</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+
+</script>
+
+{% endblock %}

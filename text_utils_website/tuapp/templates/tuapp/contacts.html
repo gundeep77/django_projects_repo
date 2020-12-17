@@ -1,0 +1,31 @@
+{% extends 'tuapp/basic.html' %}
+
+{% block title %} Contact Us {% endblock %}
+
+{% block css %} 
+.my-footer {
+  position: relative;
+  width: fit-content;
+  margin-top: 450px;
+  margin-left: 510px;
+}
+{% endblock %}
+
+{% block body %}
+
+<div class="alert alert-info container" role="alert">
+    <h4 class="alert-heading">Contact Details of our Executives</h4>
+    <p style="font-size: 20px; font-family: 'Times New Roman'; line-height: 1.8">
+        Someone1(CEO and CTO): <a href="https://www.facebook.com/someone1">https://www.facebook.com/someone1</a><br>
+        Someone2(CAE): <a href="https://www.facebook.com/someone2">https://www.facebook.com/someone2/</a>
+    </p>
+    <a class="btn btn-dark" onclick="goBack()" role="button">Go Back</a>
+</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

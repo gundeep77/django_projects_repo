@@ -1,0 +1,32 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %} No Result {% endblock %}
+
+{% block body %}
+
+{% if lengthy_query|length > 50 %}
+<div class="container">
+    <h2 class="mt-2">Search Results for "{{lengthy_query|truncatechars:20}}":<br><br>
+        <h3>Word limit reached.</h3><br><br>
+        <h4>Suggestions:<br><br></h4>
+        <ul>
+            <li>Try small relevant words</li>
+            <li>Try more general terms</li>
+        </ul>
+    </h2>
+    
+    {% elif prodNames_combined|length == 0 %}
+    <div class="container">
+        <h2 class="mt-2">Search Results for "{{query}}":<br><br>
+            <h3>Your search did not match any product.</h3><br><br>
+            <h4>Suggestions:<br><br></h4>
+            <ul>
+                <li>Try different keywords</li>
+                <li>Try more general terms</li>
+            </ul>
+        </h2>
+
+
+        {% endif %}
+
+        {% endblock %}

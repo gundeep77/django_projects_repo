@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>{% block title %} {% endblock %}</title>
+    <style>
+        {% block css %} {% endblock %}
+    </style>
+</head>
+
+<body style="background-color: rgb(247, 244, 244);">
+    {% if messages %}
+        {% for message in messages %}
+        <div style="margin-bottom: 0;" class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" style="font-size: 25px; font-family: Comic Sans MS, Helvetica, sans-serif;" href="/tuapp">Text Utils</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}" style="font-size: large; text-align: center; display: inline;">About&nbsp;Us</a>
+                </li>
+                
+            </ul>
+            
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown" style = "margin-inline-start: 1050px">
+                <a style="margin-right: -10px; text-align: inherit;" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello,&nbsp;
+          {{request.user.first_name}}
+                </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href = "" data-toggle="modal" data-target="#change_pass_modal">Change Password</a>
+            </li>
+            </ul>
+            <form action="logout/" method = "post"> {% csrf_token %}
+                <button type="submit" class="btn btn-secondary mr-0 ml-4">
+                    Logout
+                </button>
+            </form>
+        
+        </div>
+    </nav>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="change_pass_modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="change_pass_modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="change_pass_modal">Change your Password here:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form action='change_password/' method='post'> {% csrf_token %}
+                        <div class="form-group">
+                            <label for="changepass">Old Password:</label>
+                            <input type="password" class="form-control" id="oldpass" name="oldpass"
+                                placeholder="Enter Old Password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="changepass">New Password:</label>
+                            <input type="password" class="form-control" id="newpass" name="newpass" placeholder="Enter New Password"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="changepass">Re-Enter New Password:</label>
+                            <input type="password" class="form-control" id="confirmpass" name="confirmpass" placeholder="Confirm New Password"
+                                required>
+                        </div>
+
+                       <div class="form-group">
+                            <button type="submit" class="btn btn-dark">Confirm Changes</button>
+                       </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block body %} {% endblock %}
+
+    <footer class="my-footer container">
+        <pre>
+        Text Utils© 2020. All Rights Reserved
+                      <a href="{% url 'contacts' %}">Contact Us</a>
+    </pre>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

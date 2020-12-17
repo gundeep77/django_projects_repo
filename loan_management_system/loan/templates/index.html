@@ -1,0 +1,130 @@
+{% extends "basic.html" %}
+
+{% block body %}
+{% load static %}
+
+
+<img src="{% static 'card.png' %}" style="margin-top: 60px; margin-left: 200px;" width="500px" height="600px" alt="credit card">
+
+<div style="margin-top: -540px; margin-left: 810px;">
+    <p style="font-size: xx-large; font-family: comic Sans MS; color: rgb(13, 54, 114);"><strong>Get loans instantly anytime, anywhere!!</strong></p>
+</div>
+
+<div>
+    <p style="font-size: large; margin-top: 50px; margin-left: 815px;"><strong>Login as a customer to apply for a loan:</strong></p>
+</div>
+
+<div style="margin-top: 550px; margin-right: 400px;" class="container">
+    <div class="dropdown">
+        <button style="margin-top: -1000px; margin-left: 800px;" class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Customer Login
+                </button>
+        <form action="customer_signin/" method="post" class="dropdown-menu p-4"> {% csrf_token %}
+            <div class="form-group">
+                <label for="cust_username">Username</label>
+                <input type="text" class="form-control" id="cust_username" name="cust_username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <label for="cust_pass">Password</label>
+                <input type="password" class="form-control" id="cust_pass" name="cust_pass" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="mb-2 btn btn-danger">Sign in</button>
+            <p style="margin-top: 10px; margin-bottom: 5px;">Don't have an account?</p>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#signupmodal">Sign up</button>
+        </form>
+    </div>
+
+    <!-- Customer Sign up Modal -->
+
+    <div class="modal fade" id="signupmodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupmodal">Customer Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <form action='customer_signup/' method='post'> {% csrf_token %}
+
+                        <div class="form-group">
+                            <label for="first_name">Enter First Name:</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name">Enter Last Name:</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="first_name">Choose your username:</label>
+                            <input type="text" class="form-control" id="signupusername" name="signupusername" placeholder="Choose a unique username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signupemail">Enter your email:</label>
+                            <input type="email" class="form-control" id="signupmail" name="signupemail" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass1">Choose your Password:</label>
+                            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pass2">Confirm your Password:</label>
+                            <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dropdown">
+        <button style="margin-top: -1000px; margin-left: 1000px;" class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Agent Login
+                </button>
+        <form action="agent_signin/" method="post" class="dropdown-menu p-4"> {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleDropdownFormEmail2">Email address</label>
+                <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleDropdownFormPassword2">Password</label>
+                <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="btn btn-danger">Sign in</button>
+        </form>
+    </div>
+
+
+    <div class="dropdown">
+        <button style="margin-top: -1000px; margin-left: 1200px;" class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Admin Login
+                </button>
+        <form action="admin_signin/" method="post" class="dropdown-menu p-4"> {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleDropdownFormEmail2">Email address</label>
+                <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleDropdownFormPassword2">Password</label>
+                <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="btn btn-danger">Sign in</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

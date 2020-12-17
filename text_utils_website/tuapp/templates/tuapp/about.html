@@ -1,0 +1,35 @@
+{% extends 'tuapp/basic.html' %}
+
+{% block title %} About Us {% endblock %}
+
+{% block css %} 
+.my-footer {
+  position: relative;
+  width: fit-content;
+  margin-top: 400px;
+  margin-left: 510px;
+}
+{% endblock %}
+
+{% block body %}
+
+<div class="alert alert-info container" role="alert">
+    <h4 class="alert-heading">About the Website</h4>
+    <p style="font-size: 20px; font-family: 'Times New Roman'; line-height: 1.8">
+        Text Utils is all about manipulation of a piece of text input by the user.
+        It provides you with the basic text manipulation functions, namely Capitalize,
+        Remove Punctuations, Remove Extra Empty lines, Remove Extra Spaces and count the
+        number of characters. Basically, if you need a neat and clean text, Text Utils
+        does it all for you.
+    </p>
+    <a class="btn btn-dark" onclick="goBack()" role="button">Go Back</a>
+</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+
+</script>
+
+{% endblock %}

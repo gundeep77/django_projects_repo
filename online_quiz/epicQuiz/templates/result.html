@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+        <title>Quiz Result</title>
+        <style>
+            h1,
+            h2,
+            h3 {
+                font-family: 'Times New Roman', Times, serif;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <body style="background-image: url('/static/final3.png'); background-repeat: no-repeat; background-attachment: fixed; background-position: center; background-size: cover;">
+        <center style="position: fixed; left: 70px; top: 10px; margin-right: 800px;">
+            <h2 style="padding-top: 70px;"><b>You have successfully completed the quiz!<br><br>
+        Thank you for your interest in Epic Quiz!</b></h2><br><br>
+            <h3>Your Final Score:</h3><br>
+            <h1 style="color: rgb(236, 160, 46);">{{count}}/10</h1><br>
+            <h3 style="color: rgb(236, 160, 46);">Your performance in the quiz was {{remark}}</h3><br><br>
+            <h2>Visit us again for more mind bending quizes! <br><br>Happy Learning!</h2><br>
+            <a href="{% url 'user_page' %}"><button type="button" class="btn btn-danger">Return to Home Page</button></a>
+        </center>
+
+        <center style="margin-left: 800px;">
+            <h3 style="margin-top: 81px; margin-right: 470px;">Quiz Summary:</h3>
+            <table style="margin: 30px; color: rgb(201, 230, 230);">
+                {% for ele in final %}
+                <th style="padding-bottom: 5px; padding-top: 5px; font-size: large;">{{forloop.counter}}. {{ele.0}}</th>
+                <tr>
+                    <td style="padding-bottom: 5px; padding-top: 5px;"><b>Your response:</b> {{ele.1}}</td>
+                </tr>
+                <tr>
+                    <td style="padding-bottom: 5px; padding-top: 5px;"><b>Correct response:</b> {{ele.2}}</td>
+                </tr>
+                
+                {% endfor %}
+            </table>
+        </center>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    </body>
+
+</html>

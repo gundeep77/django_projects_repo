@@ -1,0 +1,42 @@
+{% extends 'tuapp/basic.html' %}
+
+{% block title %} Analysis {% endblock %}
+
+{% block css %}
+.my-footer {
+  position: relative;
+  width: fit-content;
+  margin-top: 390px;
+  margin-left: 510px;
+}
+{% endblock %}
+
+{% block body %}
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Success!</h4>
+    <p>Your text has been analyzed!</p>
+</div>
+
+<div class="container">
+    <h2>Analyzed text result is as follows:</h2>
+
+    <p>
+
+    <pre>{{analyzed_text}}</pre>
+    {{char_count}}
+
+       
+    <form action="download" method = "post">
+      {% csrf_token %}
+      <a class="btn btn-dark" onclick="goBack()" role="button">Go Back</a>
+      <!-- <a class="btn btn-dark" type = "submit" href = "analyzed_text.txt" role="button" download>Download .txt</a> -->
+    </form>
+</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

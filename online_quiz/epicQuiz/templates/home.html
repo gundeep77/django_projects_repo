@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+        <title>Welcome to Epic Quiz</title>
+
+        <style>
+            @keyframes animated-text {
+                from {
+                    width: 0;
+                }
+                to {
+                    width: 700px;
+                }
+            }
+            
+            h1 {
+                margin: 70px;
+                white-space: nowrap;
+                overflow: hidden;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                color: rgba(214, 207, 231, 0.822);
+                font-size: 50px;
+                animation: animated-text 1s steps(100, end) 1s 1 normal both;
+            }
+            
+            .p3 {
+                white-space: nowrap;
+                overflow: hidden;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                color: rgba(214, 207, 231, 0.822);
+                font-size: 30px;
+                animation: animated-text 1s steps(100, end) 2s 1 normal both;
+            }
+            .p4 {
+                white-space: nowrap;
+                overflow: hidden;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                color: rgba(214, 207, 231, 0.822);
+                font-size: 30px;
+                animation: animated-text 2s steps(100, end) 3s 1 normal both;
+            }
+
+        </style>
+    </head>
+
+    <body style="background-image: url('/static/home_image.jpg'); background-repeat: no-repeat;
+background-attachment: fixed; background-position: center; background-size: cover;">
+
+{% if messages %} {% for message in messages %}
+
+<div style="position: fixed; top: 5px;" class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+</button>
+</div>
+{% endfor %} {% endif %}
+
+        <center>
+            <h1><b>Welcome to Epic Quiz!
+        </b></h1>
+            <p class="p3" style="color: rgba(214, 207, 231, 0.822);">The ultimate platform to take mind bending quizes<br>on the go and enrich your knowledge in every category</p>
+            <br>
+
+            <p class="p4" style="font-size: 20px;">Please login, or signup if you don't have an account</p>
+
+            <!-- Login button trigger modal -->
+            <button style="margin-top: 50px; margin-bottom: 50px; margin-right: 30px" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#loginmodal">
+                    Login
+                </button>
+
+            <!-- Signup button trigger modal -->
+            <button style="margin-top: 50px; margin-bottom: 50px; margin-right: 30px" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#signupmodal">
+                    Signup
+                </button>
+
+            <footer style="margin-top: 170px; color: rgba(214, 207, 231, 0.822);" class="my-footer container">
+                Epic Quiz© 2020. All Rights Reserved<br>
+                Contact Email: <a href="">someone@something.com</a>
+            </footer>
+        </center>
+
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginmodal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginmodal">Please login here:</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form action='login/' method='post'> {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control mb-2" id="loginusername" name="loginusername" placeholder="Enter username" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control my-2" id="loginpass" name="loginpass" placeholder="Enter password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-dark mt-1">Login</button>
+                            <a style="margin-left: 5px;" href="#" data-bs-toggle="modal" data-bs-target="#fpassmodal">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <!-- Signup Modal -->
+        <div class="modal fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupmodal">Please signup here:</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action='signup/' method='post'> {% csrf_token %}
+
+                            <div class="form-group">
+                                <input type="text" class="form-control mb-2" id="fname" name="fname" placeholder="Your first name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control my-2" id="lname" name="lname" placeholder="Your last name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" class="form-control my-2" id="signupemail" name="signupemail" placeholder="Your email address" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control my-2" id="signupusername" name="signupusername" placeholder="Choose a unique username" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" class="form-control my-2" id="pass1" name="pass1" placeholder="Choose a password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" class="form-control my-2" id="pass2" name="pass2" placeholder="Confirm your password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark mt-1">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forgot Password Modal -->
+        <div class="modal fade" id="fpassmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="fpassmodal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="fpassmodal">Please enter your registered email address below:</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action='forgot_password/' method='post'> {% csrf_token %}
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email_id" name="email_id" placeholder="Enter here..." required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark mt-3 mb-2">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    </body>
+
+</html>

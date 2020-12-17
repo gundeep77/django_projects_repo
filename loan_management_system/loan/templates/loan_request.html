@@ -1,0 +1,124 @@
+{% extends 'basic.html' %}
+{% if request.user.is_authenticated %}
+{% block body %}
+
+<div class="dropdown">
+    <button style="position: fixed; right: 50px; top: 20px;" class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{request.user.first_name}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" data-toggle="modal" data-target = "#change_pass_modal" href = "">Change Password</a>
+      <a class="dropdown-item" href="{% url 'customer_signout' %}">Logout</a>
+    </div>
+  </div>
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="change_pass_modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+aria-labelledby="change_pass_modal" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="change_pass_modal">Change your Password here:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <form action='change_password/' method='post'> {% csrf_token %}
+                <div class="form-group">
+                    <label for="changepass">Old Password:</label>
+                    <input type="password" class="form-control" id="oldpass" name="oldpass"
+                        placeholder="Enter Old Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="changepass">New Password:</label>
+                    <input type="password" class="form-control" id="newpass" name="newpass" placeholder="Enter New Password"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="changepass">Confirm New Password:</label>
+                    <input type="password" class="form-control" id="confirmpass" name="confirmpass" placeholder="Confirm New Password"
+                        required>
+                </div>
+
+               <div class="form-group">
+                    <button type="submit" class="btn btn-danger">Confirm Changes</button>
+               </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<form action="loan_request/" method="post" style="position: fixed; bottom: 90px; left: 30px; width: 40%;" class="container">
+    {% csrf_token %}
+
+    <div style="position: fixed; top: 190px; left: 45px;">
+        <p><strong>Please fill this form to apply for a new loan:</strong></p>
+    </div>
+    <div hidden class="form-group">
+        <input value="{{request.user.first_name}}" type="text" class="form-control" id="fname" name="fname">
+    </div>
+    <div hidden class="form-group">
+        <input type="date" class="form-control" id="apply_date" name="apply_date">
+    </div>
+    <div class="form-group">
+        <label for="amount">Loan amount</label>
+        <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount" required>
+    </div>
+    <div class="form-group">
+        <label for="tenure">Tenure(in months)</label>
+        <input type="number" class="form-control" id="tenure" name="tenure" placeholder="Tenure" required>
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Additional comments(optional)</label>
+        <textarea class="form-control" id="comments" name="comments" rows="5" placeholder="For example: Reason for applying for loan, any other requests or appeals, etc."></textarea>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+            <label class="form-check-label" for="invalidCheck2">
+          I agree to the terms and conditions stated by Red Loans.
+        </label>
+        </div>
+    </div>
+    <button class="btn btn-danger" type="submit">Request Loan</button>
+</form>
+<div style="position: fixed; top: 190px; right: 300px;">
+
+<div style="position: fixed; top: 190px; right: 565px;">
+    <p><strong>List of applied loans:</strong></p>
+</div>
+
+
+
+
+
+<table style = "position: absolute; left: -420px; width: max-content; border: solid black; margin-top: 50px;" class="table table-light">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Loan Amount</th>
+        <th scope="col">Tenure(in months)</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for record in records %}
+      <tr>
+        <th>{{forloop.counter}}</th>
+        <td>{{record.apply_date}}</td>
+        <td>{{record.amount}}</td>
+        <td>{{record.tenure}}</td>
+        <td>Pending</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+{% endif %}

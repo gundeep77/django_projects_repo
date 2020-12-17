@@ -1,0 +1,71 @@
+{% extends 'tuapp/basic.html' %}
+{% if request.user.is_authenticated %}
+{% block title %} Welcome to Text Utils {% endblock %}
+
+{% block css %} 
+.my-footer {
+  position: relative;
+  width: fit-content;
+  margin-top: 130px;
+  margin-left: 510px;
+}
+{% endblock %}
+
+{% block body %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Message: </strong>{{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+<div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Welcome to Text Utils!</h4>
+    <p>You can manipulate your text here.</p>
+</div>
+
+<div class="container">
+    <form action="{% url 'analyze' %}" method='post'>
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Enter your text here:</label>
+            <textarea name='text' class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+        </div>
+
+
+        <div id="removepunc" class="custom-control custom-switch">
+            <input type="checkbox" name="removepunc" class="custom-control-input" id="customSwitch1">
+            <label class="custom-control-label" for="customSwitch1">Remove Punctuations</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="fullcaps" class="custom-control-input" id="customSwitch2">
+            <label class="custom-control-label" for="customSwitch2">Capitalize</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="newlineremover" class="custom-control-input" id="customSwitch3">
+            <label class="custom-control-label" for="customSwitch3">Remove Extra Lines</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="extraspaceremover" class="custom-control-input" id="customSwitch4">
+            <label class="custom-control-label" for="customSwitch4">Remove Extra Spaces</label>
+        </div>
+
+        <div class="custom-control custom-switch">
+            <input type="checkbox" name="charcounter" class="custom-control-input" id="customSwitch5">
+            <label class="custom-control-label" for="customSwitch5">Count Characters</label>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-md my-2">Analyze Text</button>
+    </form>
+
+</div>
+
+
+{% endblock %}
+{% endif %}

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+        <title>Text Utils</title>
+        <style>
+            .my-gif {
+                margin-top: -130px;
+                margin-left: 800px;
+            }
+            
+            .my-image {
+                margin-top: -222px;
+                margin-left: 370px;
+            }
+            
+            .jumbotron .container {
+                width: fit-content;
+                margin-top: -210px;
+                margin-left: 0px;
+            }
+            
+            .my-footer {
+                position: relative;
+                width: fit-content;
+                margin-top: 300px;
+                margin-left: 510px;
+            }
+        </style>
+
+    </head>
+
+    <body style="background-color: rgb(189, 180, 180);">
+        {% load static %} {% if messages %} {% for message in messages %}
+        <div style="margin-bottom: 0;" class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %} {% endif %}
+
+        <div style="height: 390px;" class="jumbotron">
+            <h1 style="font-family: 'Times New Roman', Times, serif; color: rgb(70, 158, 240);" class="display-4">
+                <strong>Text Utils...The Text Beautifier!
+            </strong></h1>
+            <hr style="margin-left: 0; width: 48%;" class="my-4">
+            <img class="my-gif" width="600px" height="320px" src="{% static 'textgif.gif' %}" alt="textgif">
+            <img class="my-image" width='331px' height='193' src="{% static 'textimg.png' %}" alt="textimg">
+
+            <div class="container">
+                <p>Please create an account to use text utils</p>
+                <button type="button" class="btn btn-dark mb-2" data-toggle="modal" data-target="#signupmodal">
+                Create Account
+            </button>
+                <p>Already have an account?</p>
+                <button type="button" class="btn btn-dark mb-2" data-toggle="modal" data-target="#loginmodal">
+                Login
+            </button>
+            </div>
+        </div>
+
+
+        <!-- Sign Up Modal -->
+        <div class="modal fade" id="signupmodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="signupmodal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupmodal">Please sign up here:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action='tuapp/signup/' method='post'> {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="first_name">Enter First Name:</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="last_name">Enter Last Name:</label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupusername">Choose your Username:</label>
+                                <input type="text" class="form-control" id="signupusername" name="signupusername" placeholder="Choose a unique username" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="signupemail">Enter your email:</label>
+                                <input type="email" class="form-control" id="signupmail" name="signupemail" placeholder="name@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pass1">Choose your Password:</label>
+                                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pass2">Confirm your Password:</label>
+                                <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginmodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="loginmodal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginmodal">Please login here:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action='tuapp/login/' method='post'> {% csrf_token %}
+                            <div class="form-group">
+                                <label for="loginusername">Enter your username:</label>
+                                <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginpass">Enter Password:</label>
+                                <input type="password" class="form-control" id="loginpass" name="loginpass" placeholder="Password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark">Login</button>
+                                <a style = "margin-left: 5px;" href = "#" data-toggle="modal" data-target="#fpassmodal">Forgot Password?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forgot Password Modal -->
+        <div class="modal fade" id="fpassmodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="fpassmodal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="fpassmodal">We will send you a link to the provided email address below for setting up a new password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action='tuapp/forgot_password/' method='post'> {% csrf_token %}
+                            <div class="form-group">
+                                <label for="email_id">Enter your email address:</label>
+                                <input type="email" class="form-control" id="email_id" name="email_id" placeholder="Email Address" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="my-footer container">
+            <pre>
+    Text Utils© 2020. All Rights Reserved
+                  <a style="text-align: center;" href="{% url 'contacts' %}">Contact Us</a>
+</pre>
+        </footer>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    </body>
+
+</html>
